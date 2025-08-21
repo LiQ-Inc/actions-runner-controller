@@ -374,6 +374,10 @@ template:
   ##               fieldPath: metadata.name
   ##         - name: ACTIONS_RUNNER_REQUIRE_JOB_CONTAINER
   ##           value: "true"
+  #          - name: ACTIONS_RUNNER_IMAGE
+  #            valueFrom:
+  #              fieldRef:
+    #              fieldPath: spec.containers[0].image
   ##       volumeMounts:
   ##         - name: work
   ##           mountPath: /home/runner/_work

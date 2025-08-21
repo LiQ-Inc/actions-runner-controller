@@ -185,10 +185,6 @@ spec:
         {{- include "gha-runner-scale-set.dind-container" . | nindent 8 }}
         {{- end }}
       {{- include "gha-runner-scale-set.non-runner-non-dind-containers" . | nindent 6 }}
-      {{- else if eq $containerMode.type "kubernetes" }}
-      - name: runner
-        {{- include "gha-runner-scale-set.kubernetes-mode-runner-container" . | nindent 8 }}
-      {{- include "gha-runner-scale-set.non-runner-containers" . | nindent 6 }}
       {{- else }}
       {{- include "gha-runner-scale-set.default-mode-runner-containers" . | nindent 6 }}
       {{- end }}
@@ -203,7 +199,6 @@ spec:
           {{- include "gha-runner-scale-set.dind-work-volume" . | nindent 6 }}
           {{- include "gha-runner-scale-set.non-work-volumes" . | nindent 6 }}
         {{- else if eq $containerMode.type "kubernetes" }}
-          {{- include "gha-runner-scale-set.kubernetes-mode-work-volume" . | nindent 6 }}
           {{- include "gha-runner-scale-set.non-work-volumes" . | nindent 6 }}
         {{- else }}
           {{- with .Values.template.spec.volumes }}
