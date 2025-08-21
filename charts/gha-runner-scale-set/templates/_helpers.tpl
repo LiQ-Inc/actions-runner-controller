@@ -156,23 +156,6 @@ volumeMounts:
   {{- end }}
 {{- end }}
 
-{{- define "gha-runner-scale-set.kubernetes-mode-work-volume" -}}
-{{- $createWorkVolume := 1 }}
-  {{- range $i, $volume := .Values.template.spec.volumes }}
-    {{- if eq $volume.name "work" }}
-      {{- $createWorkVolume = 0 }}
-- {{ $volume | toYaml | nindent 2 | trim  }}
-    {{- end }}
-  {{- end }}
-  {{- if eq $createWorkVolume 1 }}
-- name: work
-  ephemeral:
-    volumeClaimTemplate:
-      spec:
-        {{- .Values.containerMode.kubernetesModeWorkVolumeClaim | toYaml | nindent 8 }}
-  {{- end }}
-{{- end }}
-
 {{- define "gha-runner-scale-set.non-work-volumes" -}}
   {{- range $i, $volume := .Values.template.spec.volumes }}
     {{- if ne $volume.name "work" }}
